@@ -2,7 +2,7 @@ export interface Employee {
   name: string;
   jobTitle: string;
   email: string;
-  phone: string;
+  phoneNumber: string;
 }
 
 export type ContactList = Array<Employee>;
