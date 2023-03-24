@@ -1,0 +1,122 @@
+[
+  {
+    "name": "John Doe",
+    "jobTitle": "Software Engineer",
+    "email": "johndoe@example.com",
+    "phone": "125-555-5551"
+  },
+  {
+    "name": "Jane Smith",
+    "jobTitle": "Product Manager",
+    "email": "janesmith@example.com",
+    "phone": "345-555-5552"
+  },
+  {
+    "name": "Bob Johnson",
+    "jobTitle": "Sales Representative",
+    "email": "bobjohnson@example.com",
+    "phone": "565-555-5553"
+  },
+  {
+    "name": "Sarah Williams",
+    "jobTitle": "Marketing Coordinator",
+    "email": "sarahwilliams@example.com",
+    "phone": "785-555-5555"
+  },
+  {
+    "name": "Mike Lee",
+    "jobTitle": "Software Developer",
+    "email": "mikelee@example.com",
+    "phone": "895-555-5555"
+  },
+  {
+    "name": "Emily Chen",
+    "jobTitle": "Data Analyst",
+    "email": "emilychen@example.com",
+    "phone": "985-555-5555"
+  },
+  {
+    "name": "Chris Baker",
+    "jobTitle": "Project Manager",
+    "email": "chrisbaker@example.com",
+    "phone": "765-555-5555"
+  },
+  {
+    "name": "Samantha Park",
+    "jobTitle": "UX Designer",
+    "email": "samanthapark@example.com",
+    "phone": "325-555-5555"
+  },
+  {
+    "name": "John Smith",
+    "jobTitle": "Software Engineer",
+    "email": "john.smith@example.com",
+    "phone": "(555) 555-1234"
+  },
+  {
+    "name": "Jane Doe",
+    "jobTitle": "Product Manager",
+    "email": "jane.doe@example.com",
+    "phone": "(555) 555-5678"
+  },
+  {
+    "name": "James Johnson",
+    "jobTitle": "Marketing Specialist",
+    "email": "james.johnson@example.com",
+    "phone": "(555) 555-9012"
+  },
+  {
+    "name": "Emily Davis",
+    "jobTitle": "Sales Representative",
+    "email": "emily.davis@example.com",
+    "phone": "(555) 555-3456"
+  },
+  {
+    "name": "Michael Thompson",
+    "jobTitle": "Web Developer",
+    "email": "michael.thompson@example.com",
+    "phone": "(555) 555-7890"
+  },
+  {
+    "name": "Samantha Garcia",
+    "jobTitle": "Graphic Designer",
+    "email": "samantha.garcia@example.com",
+    "phone": "(555) 555-2345"
+  },
+  {
+    "name": "Daniel Rodriguez",
+    "jobTitle": "Software Developer",
+    "email": "daniel.rodriguez@example.com",
+    "phone": "(555) 555-6789"
+  },
+  {
+    "name": "Sarah Wilson",
+    "jobTitle": "Product Designer",
+    "email": "sarah.wilson@example.com",
+    "phone": "(555) 555-0123"
+  },
+  {
+    "name": "David Martinez",
+    "jobTitle": "IT Support",
+    "email": "david.martinez@example.com",
+    "phone": "(555) 555-4567"
+  },
+  {
+    "name": "Olivia Lee",
+    "jobTitle": "Social Media Manager",
+    "email": "olivia.lee@example.com",
+    "phone": "(555) 555-8901"
+  },
+  {
+    "name": "William Brown",
+    "jobTitle": "Project Manager",
+    "email": "william.brown@example.com",
+    "phone": "(555) 555-2345"
+  },
+  {
+    "name": "Ava Perez",
+    "jobTitle": "UI/UX Designer",
+    "email": "ava.perez@example.com",
+    "phone": "(555) 555-6789"
+  }
+]
