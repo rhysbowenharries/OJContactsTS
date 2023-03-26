@@ -8,6 +8,8 @@ export const useContactForm = (initialFormData: ContactFormData) => {
   const [formData, setFormData] = useState<ContactFormData>(initialFormData);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+
     const { name, value } = event.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -23,6 +25,7 @@ export const useContactForm = (initialFormData: ContactFormData) => {
     formData,
     handleInputChange,
     formReset,
+    setFormData,
   };
 };
 

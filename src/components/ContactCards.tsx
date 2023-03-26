@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import Modal from "react-modal";
 import Avatar from "react-nice-avatar";
 import { toast } from "react-toastify";
-import { ContactList } from "../types";
+import { ContactFormData, ContactList } from "../types";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from "./../firebase.js";
 import { ConfirmDeleteModal } from "./ConfirmDeleteModal";
-import { ConfirmUpdateModal } from "./ConfirmUpdateModal";
+import { useContactForm } from "../utils";
+import { ConatctFormInput } from "./ConatctFormInput";
 
 type Props = {
   contactList: ContactList;
@@ -30,14 +31,18 @@ const ContactCards = ({ contactList, fetchPost }: Props) => {
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const [updateId, setUpdateId] = useState<string | null>(null);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
-  const [isUpdating, setIsUpdating] = useState(false);
-  const [phone, setPhone] = useState("");
-  const [jobTitle, setJobTitle] = useState("");
-  const [confirmationMessage, setConfirmationMessage] = useState("");
+
+  const initialFormData: ContactFormData = {
+    name: "",
+    email: "",
+    jobTitle: "",
+    phoneNumber: "",
+  };
+
+  const { formData, handleInputChange, setFormData } =
+    useContactForm(initialFormData);
 
   const handleDelete = async (id: string) => {
     setDeleteId(id);
@@ -73,30 +78,30 @@ const ContactCards = ({ contactList, fetchPost }: Props) => {
   const handleUpdate = async (id: string) => {
     const employee = contactList.find((employee) => employee.id === id);
     if (employee) {
-      setName(employee.name);
-      setEmail(employee.email);
-      setPhone(employee.phoneNumber);
-      setJobTitle(employee.jobTitle);
+      setFormData({
+        name: employee.name,
+        email: employee.email,
+        phoneNumber: employee.phoneNumber,
+        jobTitle: employee.jobTitle,
+      });
+      setUpdateId(id);
       setIsUpdateModalOpen(true);
     }
   };
 
-  const handleConfirmUpdate = async () => {
+  const handleConfirmUpdate = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
     if (updateId) {
-      setIsUpdating(true);
       try {
-        await updateDoc(doc(db, "employees", updateId), {
-          name,
-          email,
-          phone,
-          jobTitle,
-        });
+        await updateDoc(doc(db, "employees", updateId), { ...formData });
         toastUpdateSuccess();
+        fetchPost();
       } catch (error: any) {
         setErrorMessage(error);
         toastError();
       } finally {
-        setIsUpdating(false);
         setUpdateId(null);
         setIsUpdateModalOpen(false);
       }
@@ -104,10 +109,7 @@ const ContactCards = ({ contactList, fetchPost }: Props) => {
   };
 
   const handleCancelUpdate = () => {
-    setName("");
-    setEmail("");
-    setPhone("");
-    setJobTitle("");
+    setFormData(initialFormData);
     setIsUpdateModalOpen(false);
   };
 
@@ -179,9 +181,11 @@ const ContactCards = ({ contactList, fetchPost }: Props) => {
         className="absolute bg-zinc-200 p-4 rounded-lg drop-shadow-lg	"
         style={modalStyles}
       >
-        <ConfirmUpdateModal
-          handleConfirmUpdate={handleConfirmUpdate}
-          handleCancelUpdate={handleCancelUpdate}
+        <ConatctFormInput
+          formData={formData}
+          handleSubmit={handleConfirmUpdate}
+          handleInputChange={handleInputChange}
+          handleFormClose={handleCancelUpdate}
         />
       </Modal>
     </>
