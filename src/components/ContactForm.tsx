@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ConatctFormInput } from "./ConatctFormInput";
 import { ContactFormData } from "../types";
+import { useContactForm } from "../utils";
 
 type Props = {
   cancelHandler: () => void;
@@ -14,29 +15,15 @@ type Props = {
 
 function ContactForm({ cancelHandler, fetchPost }: Props) {
   const [errorMessage, setErrorMessage] = useState();
-  const [formData, setFormData] = useState<ContactFormData>({
+  const initialFormData: ContactFormData = {
     name: "",
     email: "",
     jobTitle: "",
     phoneNumber: "",
-  });
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
   };
 
-  const formReset = () => {
-    setFormData({
-      name: "",
-      email: "",
-      jobTitle: "",
-      phoneNumber: "",
-    });
-  };
+  const { formData, handleInputChange, formReset } =
+    useContactForm(initialFormData);
 
   const handleFormClose = () => {
     cancelHandler();
