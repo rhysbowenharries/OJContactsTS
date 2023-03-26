@@ -83,7 +83,11 @@ const App = () => {
           }
         >
           {contactList?.length < 1 && <h1>No data matches your search</h1>}
-          <ContactCards contactList={contactList as ContactList} />
+
+          <ContactCards
+            fetchPost={() => fetchPost()}
+            contactList={contactList as ContactList}
+          />
         </section>
       ) : (
         <section className={"gap-6 p-20"}>
