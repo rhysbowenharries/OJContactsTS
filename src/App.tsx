@@ -8,24 +8,16 @@ import ContactForm from "./components/ContactForm";
 
 import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
 import { ToastContainer } from "react-toastify";
+import { useFetchPosts } from "./utils";
 
 const App = () => {
-  const [employeeData, setEmployeeData] = useState<any>([]);
   const [showContactForm, setShowContactForm] = useState(false);
   const [contactList, setContactList] = useState<
     ContactList | Array<undefined>
   >([]);
   const [filterQuery, setFilterQuery] = useState<string | number | undefined>();
 
-  const fetchPost = async () => {
-    await getDocs(collection(db, "employees")).then((querySnapshot) => {
-      const newData = querySnapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      setEmployeeData(newData);
-    });
-  };
+  const { employeeData, fetchPost } = useFetchPosts();
 
   useEffect(() => {
     fetchPost();
