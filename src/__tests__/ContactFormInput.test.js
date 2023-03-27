@@ -1,13 +1,13 @@
 import { render, fireEvent, screen } from "@testing-library/react";
-import { ConatctFormInput } from "../components/ConatctFormInput";
+import { ContactFormInput } from "../components/ContactFormInput";
 import "@testing-library/jest-dom";
 
-describe("ConatctFormInput component", () => {
+describe("ContactFormInput component", () => {
   const mockHandleSubmit = jest.fn();
   const mockHandleInputChange = jest.fn();
   const mockHandleFormClose = jest.fn();
   const formData = {
-    name: "John Doe",
+    name: "John Doe3",
     email: "john.doe@example.com",
     jobTitle: "Software Engineer",
     phoneNumber: "1234567890",
@@ -15,7 +15,7 @@ describe("ConatctFormInput component", () => {
 
   beforeEach(() => {
     render(
-      <ConatctFormInput
+      <ContactFormInput
         formData={formData}
         handleSubmit={mockHandleSubmit}
         handleInputChange={mockHandleInputChange}

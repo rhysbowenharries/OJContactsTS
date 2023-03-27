@@ -32,7 +32,7 @@ describe("ContactForm component", () => {
     const submitButton = getByTestId("submit-button");
 
     act(() => {
-      fireEvent.change(nameInput, { target: { value: "John Doe" } });
+      fireEvent.change(nameInput, { target: { value: "John DoeCF" } });
       fireEvent.change(emailInput, {
         target: { value: "john.doe@example.com" },
       });
@@ -61,7 +61,7 @@ describe("ContactForm component", () => {
     const submitButton = getByTestId("submit-button");
 
     await act(() => {
-      fireEvent.change(nameInput, { target: { value: "John Doe" } });
+      fireEvent.change(nameInput, { target: { value: "John DoeCF2" } });
       fireEvent.change(emailInput, {
         target: { value: "john.doe@example.com" },
       });

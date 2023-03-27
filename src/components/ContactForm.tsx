@@ -4,7 +4,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ConatctFormInput } from "./ConatctFormInput";
+import { ContactFormInput } from "./ContactFormInput";
 import { INITIAL_FORM_DATA } from "../typesAndConstants";
 import { useContactForm } from "../utils";
 
@@ -46,7 +46,7 @@ function ContactForm({ cancelHandler, fetchPost }: Props) {
     toast.error(`Error adding document: ${errorMessage} `);
 
   return (
-    <ConatctFormInput
+    <ContactFormInput
       formData={formData}
       handleSubmit={handleSubmit}
       handleInputChange={handleInputChange}

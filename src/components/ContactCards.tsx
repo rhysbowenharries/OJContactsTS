@@ -9,7 +9,7 @@ import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from "./../firebase.js";
 import { ConfirmDeleteModal } from "./ConfirmDeleteModal";
 import { useContactForm } from "../utils";
-import { ConatctFormInput } from "./ConatctFormInput";
+import { ContactFormInput } from "./ContactFormInput";
 
 type Props = {
   contactList: ContactList;
@@ -183,7 +183,7 @@ const ContactCards = ({ contactList, fetchPost }: Props) => {
         className="absolute bg-zinc-200 p-4 rounded-lg drop-shadow-lg	"
         style={modalStyles}
       >
-        <ConatctFormInput
+        <ContactFormInput
           formData={formData}
           handleSubmit={handleConfirmUpdate}
           handleInputChange={handleInputChange}
