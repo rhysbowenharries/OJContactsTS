@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { ContactFormData } from "./typesAndConstants";
-
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebase";
 
