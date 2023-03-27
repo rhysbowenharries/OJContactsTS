@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Modal from "react-modal";
 import Avatar from "react-nice-avatar";
 import { toast } from "react-toastify";
-import { ContactFormData, ContactList } from "../types";
+import { ContactList, INITIAL_FORM_DATA } from "../typesAndConstants";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
@@ -34,17 +34,10 @@ const ContactCards = ({ contactList, fetchPost }: Props) => {
   const [updateId, setUpdateId] = useState<string | null>(null);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
 
-  const initialFormData: ContactFormData = {
-    name: "",
-    email: "",
-    jobTitle: "",
-    phoneNumber: "",
-  };
-
   const { formData, handleInputChange, setFormData } =
-    useContactForm(initialFormData);
+    useContactForm(INITIAL_FORM_DATA);
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = (id: string) => {
     setDeleteId(id);
     setIsDeleteModalOpen(true);
   };
@@ -54,6 +47,7 @@ const ContactCards = ({ contactList, fetchPost }: Props) => {
       try {
         await deleteDoc(doc(db, "employees", deleteId));
         toastDeleteSuccess();
+        fetchPost();
       } catch (error: any) {
         setErrorMessage(error);
         toastError();
@@ -75,7 +69,7 @@ const ContactCards = ({ contactList, fetchPost }: Props) => {
     }
   }, [deleteId]);
 
-  const handleUpdate = async (id: string) => {
+  const handleUpdate = (id: string) => {
     const employee = contactList.find((employee) => employee.id === id);
     if (employee) {
       setFormData({
@@ -109,7 +103,7 @@ const ContactCards = ({ contactList, fetchPost }: Props) => {
   };
 
   const handleCancelUpdate = () => {
-    setFormData(initialFormData);
+    setFormData(INITIAL_FORM_DATA);
     setIsUpdateModalOpen(false);
   };
 
@@ -156,21 +150,29 @@ const ContactCards = ({ contactList, fetchPost }: Props) => {
           </div>
           <div className="absolute right-2 flex flex-col justify-between py-7 pr-3 text-xl opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out group-hover:bg-white z-0">
             <button onClick={() => handleDelete(contact.id)}>
-              <AiFillDelete className=" mt-5 text-red-500 hover:text-red-800" />
+              <AiFillDelete
+                data-testid="delete-button"
+                className=" mt-5 text-red-500 hover:text-red-800"
+              />
             </button>
-            <button onClick={() => handleUpdate(contact.id)}>
+            <button
+              data-testid="update-button"
+              onClick={() => handleUpdate(contact.id)}
+            >
               <AiFillEdit className=" mt-5 text-blue-500 hover:text-blue-800" />
             </button>
           </div>
         </figure>
       ))}
       <Modal
+        data-testid="delete-modal"
         isOpen={isDeleteModalOpen}
         onRequestClose={handleCancelDelete}
         className="absolute bg-zinc-200 p-4 rounded-lg drop-shadow-lg	"
         style={modalStyles}
       >
         <ConfirmDeleteModal
+          data-testid="confirm-delete-modal"
           handleConfirmDelete={handleConfirmDelete}
           handleCancelDelete={handleCancelDelete}
         />

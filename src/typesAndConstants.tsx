@@ -14,3 +14,10 @@ export interface ContactFormData {
   jobTitle: string;
   phoneNumber: string;
 }
+
+export const INITIAL_FORM_DATA: ContactFormData = {
+  name: "",
+  email: "",
+  jobTitle: "",
+  phoneNumber: "",
+};

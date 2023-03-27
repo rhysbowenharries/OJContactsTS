@@ -5,7 +5,7 @@ import { db } from "../firebase";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { ConatctFormInput } from "./ConatctFormInput";
-import { ContactFormData } from "../types";
+import { INITIAL_FORM_DATA } from "../typesAndConstants";
 import { useContactForm } from "../utils";
 
 type Props = {
@@ -15,15 +15,9 @@ type Props = {
 
 function ContactForm({ cancelHandler, fetchPost }: Props) {
   const [errorMessage, setErrorMessage] = useState();
-  const initialFormData: ContactFormData = {
-    name: "",
-    email: "",
-    jobTitle: "",
-    phoneNumber: "",
-  };
 
   const { formData, handleInputChange, formReset } =
-    useContactForm(initialFormData);
+    useContactForm(INITIAL_FORM_DATA);
 
   const handleFormClose = () => {
     cancelHandler();

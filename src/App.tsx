@@ -1,9 +1,6 @@
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "./firebase";
-
 import ContactCards from "./components/ContactCards";
 import { useEffect, useState } from "react";
-import { ContactList, Employee } from "./types";
+import { ContactList, Employee } from "./typesAndConstants";
 import ContactForm from "./components/ContactForm";
 
 import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";

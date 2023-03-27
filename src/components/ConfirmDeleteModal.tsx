@@ -1,5 +1,3 @@
-import React from "react";
-
 type Props = {
   handleConfirmDelete: () => void;
   handleCancelDelete: () => void;
@@ -21,6 +19,7 @@ export const ConfirmDeleteModal = ({
           Cancel
         </button>
         <button
+          data-testid="confirm-delete-button"
           className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded inline-flex items-center"
           onClick={handleConfirmDelete}
         >

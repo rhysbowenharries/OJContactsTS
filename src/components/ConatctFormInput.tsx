@@ -1,5 +1,5 @@
 import React from "react";
-import { ContactFormData } from "../types";
+import { ContactFormData } from "../typesAndConstants";
 
 type Props = {
   formData: ContactFormData;
@@ -86,6 +86,7 @@ export const ConatctFormInput = ({
             Cancel
           </button>
           <button
+            data-testid="submit-button"
             type="submit"
             className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
           >
