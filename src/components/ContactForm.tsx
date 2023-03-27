@@ -28,7 +28,7 @@ function ContactForm({ cancelHandler, fetchPost }: Props) {
     event.preventDefault();
 
     try {
-      const docRef = await addDoc(collection(db, "employees"), formData);
+      await addDoc(collection(db, "employees"), formData);
       toastSuccess();
     } catch (e: any) {
       setErrorMessage(e);

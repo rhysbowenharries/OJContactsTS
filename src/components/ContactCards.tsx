@@ -16,6 +16,7 @@ type Props = {
   fetchPost: () => void;
 };
 
+// needed for centering the modal on screen
 const modalStyles = {
   content: {
     top: "50%",
@@ -37,6 +38,7 @@ const ContactCards = ({ contactList, fetchPost }: Props) => {
   const { formData, handleInputChange, setFormData } =
     useContactForm(INITIAL_FORM_DATA);
 
+  // triggers confirmation window when the user clicks on the delete button,
   const handleDelete = (id: string) => {
     setDeleteId(id);
     setIsDeleteModalOpen(true);
@@ -69,6 +71,7 @@ const ContactCards = ({ contactList, fetchPost }: Props) => {
     }
   }, [deleteId]);
 
+  // triggers form modal when the user clicks on the edit button, finds the relevant employee and sets the form data
   const handleUpdate = (id: string) => {
     const employee = contactList.find((employee) => employee.id === id);
     if (employee) {
@@ -83,10 +86,21 @@ const ContactCards = ({ contactList, fetchPost }: Props) => {
     }
   };
 
+  // triggers when the user clicks on the update button in the form modal
   const handleConfirmUpdate = async (
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
+    // hack: bug when updating, the validation doesnt catch empty field
+    if (
+      formData.name.trim() === "" ||
+      formData.email.trim() === "" ||
+      formData.jobTitle.trim() === "" ||
+      formData.phoneNumber.trim() === ""
+    ) {
+      toastInvalidForm();
+      return;
+    }
     if (updateId) {
       try {
         await updateDoc(doc(db, "employees", updateId), { ...formData });
@@ -113,10 +127,12 @@ const ContactCards = ({ contactList, fetchPost }: Props) => {
     }
   }, [updateId]);
 
+  // Toast messages
   const toastDeleteSuccess = () =>
     toast.success("Your contact has been deleted!");
   const toastUpdateSuccess = () =>
     toast.success("Your contact has been updated!");
+  const toastInvalidForm = () => toast.error(`No fields can be empty `);
   const toastError = () =>
     toast.error(`Error updating document: ${errorMessage} `);
 
@@ -180,7 +196,7 @@ const ContactCards = ({ contactList, fetchPost }: Props) => {
       <Modal
         isOpen={isUpdateModalOpen}
         onRequestClose={handleCancelUpdate}
-        className="absolute bg-zinc-200 p-4 rounded-lg drop-shadow-lg	"
+        className="absolute bg-zinc-200 p-4 rounded-lg drop-shadow-lg	md:w-3/5"
         style={modalStyles}
       >
         <ContactFormInput

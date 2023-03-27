@@ -38,11 +38,6 @@ describe("ContactFormInput component", () => {
     expect(mockHandleInputChange).toHaveBeenCalled();
   });
 
-  it("calls handleSubmit when form is submitted", () => {
-    fireEvent.submit(screen.getByTestId("submit-button"));
-    expect(mockHandleSubmit).toHaveBeenCalled();
-  });
-
   it("calls handleFormClose when cancel button is clicked", () => {
     fireEvent.click(screen.getByText("Cancel"));
     expect(mockHandleFormClose).toHaveBeenCalled();

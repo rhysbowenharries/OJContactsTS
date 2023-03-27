@@ -16,14 +16,17 @@ const App = () => {
 
   const { employeeData, fetchPost } = useFetchPosts();
 
+  // Fetch data from the database but only once. Bug as the DB call keeps fiering otherwise
   useEffect(() => {
     fetchPost();
   }, []);
 
+  // Search functionality,
   useEffect(() => {
     if (!filterQuery) {
       setContactList(employeeData);
     } else {
+      // filters the DB down to those with relevant data
       const queryString = filterQuery.toString().toLowerCase();
       const filteredData = employeeData?.filter((contact: Employee) => {
         const target =
@@ -31,6 +34,7 @@ const App = () => {
 
         return target.toLowerCase().includes(queryString);
       });
+      // passes this as a prop to the ContactCards component
       setContactList(filteredData);
     }
   }, [employeeData, filterQuery]);
@@ -58,7 +62,7 @@ const App = () => {
         </button>
       </section>
       {showContactForm && (
-        <section>
+        <section className="pb-10">
           <ContactForm
             cancelHandler={() => setShowContactForm(false)}
             fetchPost={() => fetchPost()}

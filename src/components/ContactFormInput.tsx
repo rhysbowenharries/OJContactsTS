@@ -15,21 +15,22 @@ export const ContactFormInput = ({
   handleInputChange,
   handleFormClose,
 }: Props) => {
-  const [isFormValid, setIsFormValid] = useState(false);
+  const [isFormInvalid, setIsFormInvalid] = useState(true);
 
+  // simple validation, would imporve for production
   const validateForm = (): boolean => {
     const { name, email, jobTitle, phoneNumber } = formData;
     return (
-      name.trim() !== "" &&
-      email.trim() !== "" &&
-      jobTitle.trim() !== "" &&
-      phoneNumber.trim() !== ""
+      name.trim() === "" ||
+      email.trim() === "" ||
+      jobTitle.trim() === "" ||
+      phoneNumber.trim() === ""
     );
   };
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>): void => {
     handleInputChange(event);
-    setIsFormValid(validateForm());
+    setIsFormInvalid(validateForm());
   };
   const toastError = () =>
     toast.error(
@@ -38,15 +39,15 @@ export const ContactFormInput = ({
 
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    if (isFormValid) {
-      handleSubmit(event);
-    } else {
+    if (isFormInvalid) {
       toastError();
+    } else {
+      handleSubmit(event);
     }
   };
 
   return (
-    <div className="pb-20">
+    <div>
       <form
         onSubmit={handleFormSubmit}
         className="p-6 max-w-3xl mx-10 md:m-auto bg-white rounded-lg shadow-md"
