@@ -17,9 +17,17 @@ export const ContactFormInput = ({
 }: Props) => {
   const [isFormInvalid, setIsFormInvalid] = useState(true);
 
-  // simple validation, would imporve for production
+  function isInvalidNumberInput(input: string) {
+    const pattern = /^[+-]?\d+$/;
+    return !pattern.test(input);
+  }
+  // simple validation, would imporve for production, more helpful messages for example
   const validateForm = (): boolean => {
     const { name, email, jobTitle, phoneNumber } = formData;
+
+    if (isInvalidNumberInput(phoneNumber)) {
+      return true;
+    }
     return (
       name.trim() === "" ||
       email.trim() === "" ||
